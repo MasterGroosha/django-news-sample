@@ -1,10 +1,24 @@
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta
+from random import sample
 
 from django.http import HttpResponse
 from django.template import loader
 
-
-# Create your views here.
+headlines = [
+    "iPhone 14 Pro подешевел в России",
+    "Раскрыты подробные характеристики пикапа Tesla Cybertruck",
+    "Поставки компьютеров вырастут из-за искусственного интеллекта",
+    "Под поверхностью Марса обнаружили многоугольные объекты",
+    "В ChatGPT обнаружили уязвимость",
+    "Метеозависимым людям подсказали способы легче перенести магнитную бурю",
+    "Обнаружен самый слабый спутник Млечного Пути",
+    "Детеныш панды из Московского зоопарка начал ползать и попал на видео",
+    "Бактерии в йогурте предотвратили развитие психических расстройств",
+    "Телескоп Уэбба запечатлел беспрецедентные детали объекта Хербига-Аро",
+    "На Алтае медведицу засняли во время кормления малышей",
+    "Названы лучшие производители техники из Азии",
+    "Создатели «Ведьмака» рассказали о новой части игры",
+]
 
 
 def available_dates():
@@ -20,5 +34,16 @@ def index(request):
     template = loader.get_template("news/index.html")
     context = {
         "available_dates": available_dates()
+    }
+    return HttpResponse(template.render(context, request))
+
+
+def view_by_date(request, news_date: str):
+    requested_date = datetime.strptime(news_date, "%Y-%m-%d")
+
+    template = loader.get_template("news/news_by_date.html")
+    context = {
+        "news_date": requested_date.strftime("%d.%m.%Y"),
+        "headlines": sample(headlines, 3)
     }
     return HttpResponse(template.render(context, request))
