@@ -2,8 +2,8 @@
 
 <h4>Добрый день! Выберите дату, новости за которую вы хотите увидеть:</h4>
 <ul>
-{% for d in available_dates %}
-    <li><a href="/news/{{ d|date:'Y-m-d' }}">{{ d|date:'Y-m-d' }}</a></li>
+{% for news_date in available_dates %}
+    <li><a href="/news/{{ news_date|date:'Y-m-d' }}">{{ news_date|date:'Y-m-d' }}</a></li>
 {% endfor %}
 </ul>
 
