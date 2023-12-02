@@ -1,4 +1,4 @@
-from datetime import date, datetime, timedelta
+from datetime import date, timedelta
 from random import sample
 
 from django.http import HttpResponse
@@ -38,12 +38,10 @@ def index(request):
     return HttpResponse(template.render(context, request))
 
 
-def view_by_date(request, news_date: str):
-    requested_date = datetime.strptime(news_date, "%Y-%m-%d")
-
+def view_by_date(request, news_date: date):
     template = loader.get_template("news/news_by_date.html")
     context = {
-        "news_date": requested_date.strftime("%d.%m.%Y"),
+        "news_date": news_date.strftime("%d.%m.%Y"),
         "headlines": sample(headlines, 3)
     }
     return HttpResponse(template.render(context, request))
