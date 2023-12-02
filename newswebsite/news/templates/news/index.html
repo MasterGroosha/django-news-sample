@@ -1,6 +1,10 @@
+{% include "news/header.html" %}
+
 <h4>Добрый день! Выберите дату, новости за которую вы хотите увидеть:</h4>
 <ul>
 {% for d in available_dates %}
     <li><a href="/news/{{ d|date:'Y-m-d' }}">{{ d|date:'Y-m-d' }}</a></li>
 {% endfor %}
 </ul>
+
+{% include "news/footer.html" %}
