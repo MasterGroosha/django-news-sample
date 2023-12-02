@@ -12,8 +12,8 @@ class DateConverter:
     def to_python(self, value: str) -> date:
         return datetime.strptime(value, self.format).date()
 
-    def to_url(self, value: date) -> str:
-        return value.strftime(self.format)
+    def to_url(self, value: str) -> str:
+        return value
 
 
 register_converter(DateConverter, "published_date")
@@ -21,5 +21,5 @@ register_converter(DateConverter, "published_date")
 app_name = "news"
 urlpatterns = [
     path("", views.index, name="index"),
-    path("<published_date:news_date>", views.view_by_date, name="view_by_date")
+    path("<published_date:news_date>/", views.view_by_date, name="view_by_date")
 ]

@@ -3,7 +3,7 @@
 <h4>Добрый день! Выберите дату, новости за которую вы хотите увидеть:</h4>
 <ul>
 {% for news_date in available_dates %}
-    <li><a href="/news/{{ news_date|date:'Y-m-d' }}">{{ news_date|date:'Y-m-d' }}</a></li>
+    <li><a href="{% url 'news:view_by_date' news_date|date:'Y-m-d' %}">{{ news_date|date:'Y-m-d' }}</a></li>
 {% endfor %}
 </ul>
 
