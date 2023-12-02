@@ -1,2 +1,3 @@
 /venv/
 .idea/
+/newswebsite/db.sqlite3
