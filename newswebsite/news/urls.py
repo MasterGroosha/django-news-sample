@@ -18,8 +18,25 @@ class DateConverter:
 
 register_converter(DateConverter, "published_date")
 
+
+class CityConverter:
+    regex = r"[a-z]*"
+
+    def to_python(self, value: str) -> str:
+        if value not in {"moscow", "omsk", "vladivostok"}:
+            raise ValueError
+        return value
+
+    def to_url(self, value: str) -> str:
+        return value
+
+
+register_converter(CityConverter, "city_converter")
+
+
 app_name = "news"
 urlpatterns = [
     path("", views.index, name="index"),
-    path("<published_date:news_date>/", views.view_by_date, name="view_by_date")
+    path("<published_date:news_date>/", views.view_by_date, name="view_by_date"),
+    path("<city_converter:city>/", views.view_by_city, name="view_by_city"),
 ]

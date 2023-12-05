@@ -45,3 +45,7 @@ def view_by_date(request, news_date: date):
         "headlines": sample(headlines, 3)
     }
     return HttpResponse(template.render(context, request))
+
+
+def view_by_city(request, city: str):
+    return HttpResponse(f"Hello from {city.title()}")
